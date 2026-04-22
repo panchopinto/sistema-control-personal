@@ -1,0 +1,16 @@
+{
+  "name": "Sistema de Control Personal",
+  "short_name": "SCP NeoTech",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#07111f",
+  "theme_color": "#0b1220",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

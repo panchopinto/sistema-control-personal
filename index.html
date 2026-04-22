@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Control Personal</title>
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="description" content="Dashboard personal para enfoque, ansiedad, sueño, control de consumo y medicación." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar glass">
+      <div class="brand">
+        <div class="brand-badge">⚡</div>
+        <div>
+          <p class="eyebrow">NeoTech Mode</p>
+          <h1>Sistema de Control Personal</h1>
+        </div>
+      </div>
+
+      <nav class="side-nav">
+        <a href="#dashboard" class="nav-link active">📊 Dashboard</a>
+        <a href="#medicacion" class="nav-link">💊 Medicación</a>
+        <a href="#registro" class="nav-link">🧠 Registro diario</a>
+        <a href="#craving" class="nav-link">🚨 Anti-craving</a>
+        <a href="#plan" class="nav-link">🎯 Recomendaciones</a>
+      </nav>
+
+      <div class="mission card-mini">
+        <p class="eyebrow">Objetivo</p>
+        <h2>No estás dejando algo</h2>
+        <p>Estás <strong>subiendo de nivel tu sistema completo</strong> para tu salud, tu futuro con Belén y tus proyectos.</p>
+      </div>
+
+      <div class="sidebar-actions">
+        <button id="themeToggle" class="btn btn-secondary">🌓 Tema</button>
+        <button id="fontPlus" class="btn btn-ghost">A+</button>
+        <button id="fontMinus" class="btn btn-ghost">A−</button>
+      </div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar glass">
+        <div>
+          <p class="eyebrow">Panel de alto rendimiento</p>
+          <h2>Seguimiento personal + alertas + recomendaciones</h2>
+        </div>
+        <div class="topbar-actions">
+          <button id="notifyBtn" class="btn btn-primary">🔔 Activar notificaciones</button>
+          <button id="exportBtn" class="btn btn-secondary">📥 Exportar JSON</button>
+          <label class="btn btn-ghost import-label">
+            📤 Importar JSON
+            <input type="file" id="importInput" accept=".json" hidden />
+          </label>
+        </div>
+      </header>
+
+      <section id="dashboard" class="hero grid-3">
+        <article class="metric glass">
+          <span class="metric-icon">🔥</span>
+          <div>
+            <p class="metric-label">Días sin consumo</p>
+            <h3 id="streakValue">0</h3>
+          </div>
+        </article>
+        <article class="metric glass">
+          <span class="metric-icon">💊</span>
+          <div>
+            <p class="metric-label">Próxima toma</p>
+            <h3 id="nextMedValue">--:--</h3>
+            <small id="nextMedName">Sin datos</small>
+          </div>
+        </article>
+        <article class="metric glass">
+          <span class="metric-icon">🧭</span>
+          <div>
+            <p class="metric-label">Estado general</p>
+            <h3 id="statusValue">En ajuste</h3>
+            <small id="statusSub">Completa registros para mayor precisión</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid-main">
+        <article id="medicacion" class="panel glass">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Timeline diario</p>
+              <h3>Plan de medicación</h3>
+            </div>
+            <small>Alertas 10 min antes y a la hora exacta</small>
+          </div>
+          <div id="medList" class="med-list"></div>
+        </article>
+
+        <article class="panel glass">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Tendencias</p>
+              <h3>Últimos 7 registros</h3>
+            </div>
+            <small>Enfoque, sueño y ansiedad</small>
+          </div>
+          <canvas id="trendCanvas" width="900" height="330" aria-label="Gráfico de tendencias"></canvas>
+        </article>
+
+        <article id="registro" class="panel glass">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Seguimiento diario</p>
+              <h3>Registro de hoy</h3>
+            </div>
+            <small>Se guarda en tu navegador</small>
+          </div>
+
+          <form id="dailyForm" class="daily-form">
+            <div class="field">
+              <label for="consumo">❌ ¿Consumí alcohol o cannabis hoy?</label>
+              <select id="consumo" required>
+                <option value="no">No</option>
+                <option value="si">Sí</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="enfoque">🧠 Enfoque <span id="enfoqueValue">6</span>/10</label>
+              <input id="enfoque" type="range" min="0" max="10" value="6" />
+            </div>
+
+            <div class="field">
+              <label for="sueno">😴 Sueño <span id="suenoValue">6</span>/10</label>
+              <input id="sueno" type="range" min="0" max="10" value="6" />
+            </div>
+
+            <div class="field">
+              <label for="ansiedad">😰 Ansiedad <span id="ansiedadValue">4</span>/10</label>
+              <input id="ansiedad" type="range" min="0" max="10" value="4" />
+            </div>
+
+            <div class="field">
+              <label for="notes">📝 Observaciones breves</label>
+              <textarea id="notes" rows="4" placeholder="Ej: día exigente en el liceo, dormí mejor, apareció craving después de las 20:00..."></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">✅ Guardar registro</button>
+              <button class="btn btn-secondary" type="button" id="seedBtn">🧪 Cargar ejemplo</button>
+            </div>
+          </form>
+        </article>
+
+        <article id="craving" class="panel glass">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Protocolo guiado</p>
+              <h3>Anti-craving</h3>
+            </div>
+            <small>Respuesta rápida para impulsos</small>
+          </div>
+
+          <div class="craving-box">
+            <div class="craving-top">
+              <div>
+                <h4>Cuando aparezca el impulso</h4>
+                <p>Sigue el orden. No negocies en el minuto 1.</p>
+              </div>
+              <button id="startCraving" class="btn btn-primary">🚨 Iniciar protocolo</button>
+            </div>
+
+            <ol id="cravingSteps" class="steps">
+              <li>⏳ Espera 10 minutos</li>
+              <li>🚶 Cambia de ambiente</li>
+              <li>🏃 Haz algo físico, aunque sea caminar</li>
+              <li>🧠 Recién decide</li>
+            </ol>
+
+            <div class="timer-wrap">
+              <div class="timer-circle">
+                <span id="timerText">10:00</span>
+              </div>
+              <div class="timer-copy">
+                <p class="eyebrow">Control de impulso</p>
+                <h4 id="timerState">Listo para comenzar</h4>
+                <p id="timerHint">Tu objetivo no es aguantar sufriendo; es bajar intensidad para recuperar control.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article id="plan" class="panel glass">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Motor de apoyo</p>
+              <h3>Recomendaciones automáticas</h3>
+            </div>
+            <small>Se ajustan según tus registros</small>
+          </div>
+          <div id="recommendations" class="recommendations"></div>
+        </article>
+
+        <article class="panel glass full">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Historial reciente</p>
+              <h3>Últimos registros guardados</h3>
+            </div>
+            <small>Máximo 30 entradas locales</small>
+          </div>
+          <div id="historyList" class="history-list"></div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <template id="medTemplate">
+    <article class="med-card">
+      <div class="med-time"></div>
+      <div class="med-info">
+        <h4></h4>
+        <p></p>
+      </div>
+      <div class="med-status"></div>
+    </article>
+  </template>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
