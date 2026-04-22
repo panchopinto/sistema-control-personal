@@ -12,5 +12,10 @@
       "type": "image/svg+xml",
       "purpose": "any"
     }
+  ],
+  "orientation": "portrait",
+  "display_override": [
+    "standalone",
+    "browser"
   ]
 }

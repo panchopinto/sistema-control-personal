@@ -245,3 +245,143 @@ canvas{width:100%;background:linear-gradient(180deg,rgba(255,255,255,.03),transp
   .mobile-tab{min-height:54px;font-size:.67rem;padding:.15rem}
   .mobile-tab span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 }
+
+
+@media (max-width: 640px) and (orientation: portrait){
+  html,body{overflow-x:hidden}
+  .app-shell{display:block;min-height:auto}
+  .sidebar{
+    position:relative;
+    height:auto;
+    padding:.8rem .75rem .9rem;
+    border-right:none;
+    border-bottom:1px solid var(--line);
+  }
+  .side-nav{
+    display:none;
+  }
+  .mission,.focus-stack{
+    display:none;
+  }
+  .sidebar-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    margin-top:.35rem;
+    position:static;
+    background:none;
+    padding-top:0;
+  }
+  .content{
+    padding:.55rem .55rem 5.8rem;
+  }
+  .topbar{
+    position:relative;
+    top:0;
+    padding:.9rem;
+    border-radius:22px;
+  }
+  .topbar > div:first-child{
+    width:100%;
+  }
+  .topbar h2{
+    font-size:1rem;
+    line-height:1.25;
+  }
+  .topbar-actions{
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:.5rem;
+  }
+  .topbar-actions .btn,
+  .topbar-actions .import-label{
+    width:100%;
+  }
+  .grid-4,
+  .grid-main,
+  .weekly-summary,
+  .training-grid,
+  .training-insights,
+  .recommendations,
+  .split-2,
+  .quick-actions,
+  .timer-wrap{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:.75rem;
+  }
+  .metric,
+  .panel,
+  .summary-card,
+  .training-card,
+  .insight-card,
+  .rec-card,
+  .history-item,
+  .med-card{
+    border-radius:18px;
+  }
+  .metric{
+    padding:.95rem;
+  }
+  .metric h3{
+    font-size:1.2rem;
+  }
+  .panel{
+    padding:.9rem;
+  }
+  .panel-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:.35rem;
+  }
+  .panel-header h3{
+    font-size:1.02rem;
+  }
+  canvas{
+    width:100% !important;
+    height:240px !important;
+    max-width:100%;
+    display:block;
+  }
+  .med-card{
+    grid-template-columns:1fr;
+    align-items:flex-start;
+    gap:.4rem;
+  }
+  .med-time{
+    min-width:auto;
+  }
+  .daily-form .field input[type="number"],
+  .daily-form .field select,
+  .daily-form .field textarea,
+  .daily-form .field input[type="range"],
+  .btn{
+    width:100%;
+  }
+  .field textarea{
+    min-height:110px;
+  }
+  .mobile-tabbar{
+    position:fixed;
+    left:8px;
+    right:8px;
+    bottom:8px;
+    z-index:40;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:.25rem;
+    padding:.35rem;
+    border-radius:22px;
+  }
+  .mobile-tab{
+    min-height:56px;
+    padding:.2rem;
+    font-size:.66rem;
+  }
+  .mobile-tab span{
+    max-width:100%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+}
